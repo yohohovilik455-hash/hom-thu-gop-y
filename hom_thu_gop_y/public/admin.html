@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Admin</title>
+<script>
+async function loadData(){
+ const res = await fetch('/api/feedback');
+ const data = await res.json();
+ let html = '';
+ data.forEach(f => {
+   html += `<tr><td>${f.name}</td><td>${f.subject}</td><td>${f.message}</td><td>${f.created_at}</td></tr>`;
+ });
+ document.getElementById('data').innerHTML = html;
+}
+</script>
+</head>
+<body onload="loadData()">
+<h2>Danh sách góp ý</h2>
+<table border="1">
+<thead><tr><th>Tên</th><th>Tiêu đề</th><th>Nội dung</th><th>Thời gian</th></tr></thead>
+<tbody id="data"></tbody>
+</table>
+</body>
+</html>
