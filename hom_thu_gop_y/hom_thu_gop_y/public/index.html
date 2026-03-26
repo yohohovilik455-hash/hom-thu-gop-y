@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Hòm thư góp ý</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="header"><h1>HÒM THƯ GÓP Ý</h1></header>
+<form action="/submit" method="POST" class="form">
+<input name="name" placeholder="Họ và tên" required>
+<input name="email" placeholder="Email" required>
+<input name="phone" placeholder="Số điện thoại">
+<input name="subject" placeholder="Tiêu đề">
+<textarea name="message" placeholder="Nội dung góp ý" required></textarea>
+<button type="submit">Gửi</button>
+<script>
+if(window.location.search.includes("success")){
+    alert("Gửi góp ý thành công!");
+}
+</script>
+</form>
+</body>
+</html>

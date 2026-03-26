@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Admin Dashboard</title>
+<link rel="stylesheet" href="styles.css">
+
+<script>
+async function loadData(url = '/api/feedback'){
+    const res = await fetch(url);
+    const data = await res.json();
+
+    let html = '';
+    data.forEach(f => {
+        html += `
+        <tr>
+            <td>${f.name}</td>
+            <td>${f.subject}</td>
+            <td>${f.message}</td>
+            <td>${f.created_at}</td>
+            <td><a href="/delete/${f.id}" onclick="return confirm('Xoá?')">❌</a></td>
+        </tr>`;
+    });
+
+    document.getElementById('data').innerHTML = html;
+}
+
+function search(){
+    const q = document.getElementById('search').value;
+    loadData('/search?q=' + q);
+}
+</script>
+
+</head>
+
+<body onload="loadData()">
+
+<header class="header">
+    <h1>QUẢN LÝ GÓP Ý</h1>
+</header>
+
+<div class="dashboard">
+
+    <input id="search" placeholder="Tìm kiếm...">
+    <button onclick="search()">🔍 Tìm</button>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Tên</th>
+                <th>Tiêu đề</th>
+                <th>Nội dung</th>
+                <th>Thời gian</th>
+                <th>Xoá</th>
+            </tr>
+        </thead>
+        <tbody id="data"></tbody>
+    </table>
+
+</div>
+
+</body>
+</html>
